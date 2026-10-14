@@ -5,7 +5,7 @@ Start a timed study session, choose a building type, and review cards. If I fini
 ## Phases
 
 ### Phase 1: Foundations
-- [ ] Step 1: Hello world add-on (menu item in Anki)
+- [x] Step 1: Hello world add-on (menu item in Anki)
 - [ ] Step 2: Session timer (start button, countdown, building picker, deep focus toggle)
 
 ### Phase 2: Core loop
