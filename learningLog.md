@@ -1,0 +1,3 @@
+- What a directory junction is and linking the two folders inside my anki app and repo so that I can test the code in my repo in the cactual app without going back and forth
+- how to open an apps console window so i can see console/terminal outputs in testing, always start anki this way to make sure it syncs
+- Start Up: C:\Users\alexf\AppData\Local\Programs\Anki\anki-console.bat
