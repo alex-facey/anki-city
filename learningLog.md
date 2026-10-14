@@ -1,3 +1,9 @@
 - What a directory junction is and linking the two folders inside my anki app and repo so that I can test the code in my repo in the cactual app without going back and forth
 - how to open an apps console window so i can see console/terminal outputs in testing, always start anki this way to make sure it syncs
-- Start Up: C:\Users\alexf\AppData\Local\Programs\Anki\anki-console.bat
+- Start Up: C:\Users\alexf\AppData\Local\Programs\Anki\anki-console.bat\
+- When anki starts up it runs __init__.py once
+- using public docs as a reference tool to code
+- mw is the main window object that comes from aqt which is part of anki itself 
+- anki is built with a GUI library called Qt and uses tools like Qmenu which is a dropdown ment and also Qaction which is aclickable entry in said menu
+- Qaction doesnt do anything until linked to something
+- Anki hooks are used when connecting events from the anki user to a function whereas signlas and slots are used to have qt objects items execute a function upon being cliced
