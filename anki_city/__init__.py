@@ -36,6 +36,19 @@ class SessionWindow(QDialog):
         layout.addRow(self.deep_focus)
         layout.addRow(start_button)
 
+        # connect start button clicked signal
+        qconnect(start_button.clicked, self.start_session)
+
+
+    # start timer function
+    def start_session(self):
+        minutes = self.session_length.value()
+        building = self.building_type.currentText()
+        deep_focus = self.deep_focus.isChecked()
+
+        # show info message with the selected options
+        showInfo(f"Starting a {minutes} minute session to build {building} with Deep Focus {'enabled' if deep_focus else 'disabled'}.")
+
 
 # define a function that opens a new window when the user clicks the add on in the tools menu
 def open_session_window():

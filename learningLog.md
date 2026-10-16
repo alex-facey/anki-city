@@ -7,3 +7,6 @@
 - anki is built with a GUI library called Qt and uses tools like Qmenu which is a dropdown ment and also Qaction which is aclickable entry in said menu
 - Qaction doesnt do anything until linked to something
 - Anki hooks are used when connecting events from the anki user to a function whereas signlas and slots are used to have qt objects items execute a function upon being cliced
+- show vs exec_, show keeps anki active where as exec blocks ankis function, project uses show because you want to be able to use the main feature like answering a card of course
+- QSpinBox, QComboBox, QCheckBox, QPushButton, QFormlayout
+- methods that retunr None cant be chained 
