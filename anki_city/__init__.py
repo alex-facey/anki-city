@@ -3,6 +3,8 @@ from aqt import mw
 from aqt.utils import showInfo, qconnect
 from aqt.qt import QAction, QDialog, QSpinBox, QComboBox, QCheckBox, QPushButton, QFormLayout
 
+session_window = None 
+
 # define a new class that is a window that will be opened when the user clicks the add on in the tools menu
 class SessionWindow(QDialog):
     def __init__(self, parent):
@@ -37,8 +39,13 @@ class SessionWindow(QDialog):
 
 # define a function that opens a new window when the user clicks the add on in the tools menu
 def open_session_window():
-    dialog = SessionWindow(mw)
-    dialog.show() # use show so Anki isn't locked and I can still study while the session window is open
+    global session_window
+    if session_window is None:
+        session_window = SessionWindow(mw)
+        
+    session_window.show() # use show so Anki isn't locked and I can still study while the session window is open
+    session_window.raise_()
+    session_window.activateWindow() 
 
 # create a qaction action that is a command the user can use, its parent is the main mw window becuase if it wasnt attached then the action would be disregarded
 action = QAction("Anki City", mw)
