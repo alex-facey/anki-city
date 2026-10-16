@@ -12,8 +12,6 @@ class SessionWindow(QDialog):
         self.setWindowTitle("Anki City")
         self.resize(400, 300) # make window larger
 
-        # add any additional widgets or layout to the window 
-        
         # session length widget
         self.session_length = QSpinBox(self)
         self.session_length.setRange(1, 120) # set the range of the spinbox
@@ -28,16 +26,16 @@ class SessionWindow(QDialog):
         self.deep_focus = QCheckBox("Deep Focus", self)
         
         # start button widget
-        start_button = QPushButton("Start Session", self)
+        self.start_button = QPushButton("Start Session", self)
 
         layout = QFormLayout(self)
         layout.addRow("Session Length:", self.session_length)
         layout.addRow("Building Type:", self.building_type)
         layout.addRow(self.deep_focus)
-        layout.addRow(start_button)
+        layout.addRow(self.start_button)
 
         # connect start button clicked signal
-        qconnect(start_button.clicked, self.start_session)
+        qconnect(self.start_button.clicked, self.start_session)
 
         # label for the time
         self.time_label = QLabel("Time Remaining: 00:00", self)
@@ -52,8 +50,11 @@ class SessionWindow(QDialog):
     # start timer function, reads inputs at start so any changes dont effect already started session
     def start_session(self):
         minutes = self.session_length.value()
-        building = self.building_type.currentText()
-        deep_focus = self.deep_focus.isChecked()
+        self.session_building = self.building_type.currentText()
+        self.deep_focus_enabled = self.deep_focus.isChecked()
+
+        # disable inputs to prevent changes during the session
+        self.set_inputs_enabled(False)
 
         self.seconds_left = minutes * 60
         mins, secs = divmod(self.seconds_left, 60)
@@ -68,9 +69,19 @@ class SessionWindow(QDialog):
 
         
         if self.seconds_left <= 0:
-            self.timer.stop()
-            showInfo("Session Complete!")
+            self.finish_session() # call the finish session function to do any cleanup or final actions
 
+    def finish_session(self):
+        self.timer.stop()
+        self.set_inputs_enabled(True)
+
+        showInfo(f"Session Complete! You built a {self.session_building}")
+
+    def set_inputs_enabled(self, enabled):
+        self.session_length.setEnabled(enabled)
+        self.building_type.setEnabled(enabled)
+        self.deep_focus.setEnabled(enabled)
+        self.start_button.setEnabled(enabled)
 
 
 # define a function that opens a new window when the user clicks the add on in the tools menu

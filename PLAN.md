@@ -6,7 +6,7 @@ Start a timed study session, choose a building type, and review cards. If I fini
 
 ### Phase 1: Foundations
 - [x] Step 1: Hello world add-on (menu item in Anki)
-- [ ] Step 2: Session timer (start button, countdown, building picker, deep focus toggle)
+- [x] Step 2: Session timer (start button, countdown, building picker, deep focus toggle)
 
 ### Phase 2: Core loop
 - [ ] Step 3: Card counting and bonus buildings (count cards reviewed during a session, work out how many bonus buildings that earns from the batch size)

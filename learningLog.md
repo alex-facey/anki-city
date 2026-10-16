@@ -10,3 +10,9 @@
 - show vs exec_, show keeps anki active where as exec blocks ankis function, project uses show because you want to be able to use the main feature like answering a card of course
 - QSpinBox, QComboBox, QCheckBox, QPushButton, QFormlayout
 - methods that retunr None cant be chained 
+- whenever another method needs it, the variable needs to be conencted to self, self.method remembers the object it belonds to 
+- helper methods help refactor code into looking simpler and easier to read
+- Qtimer is used to avoid interference with Ankis event loop
+- making deisgn decisions and edge test cases along the way
+- global goes inside the function you want to definet he variable
+- test in small steps and commit each time so its easier to see what sworking 
