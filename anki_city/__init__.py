@@ -1,15 +1,39 @@
 # import the main necessary libraries that anki uses 
 from aqt import mw
 from aqt.utils import showInfo, qconnect
-from aqt.qt import QAction, QDialog
+from aqt.qt import QAction, QDialog, QSpinBox, QComboBox, QCheckBox, QPushButton, QFormLayout
 
 # define a new class that is a window that will be opened when the user clicks the add on in the tools menu
 class SessionWindow(QDialog):
     def __init__(self, parent):
         super().__init__(parent)
         self.setWindowTitle("Anki City")
-        self.resize(400, 300)
-        # add any additional widgets or layout to the window here
+        self.resize(400, 300) # make window larger
+
+        # add any additional widgets or layout to the window 
+        
+        # session length widget
+        self.session_length = QSpinBox(self)
+        self.session_length.setRange(1, 120) # set the range of the spinbox
+        self.session_length.setValue(30) # set the default value of the spinbox
+        self.session_length.setSuffix(" minutes") 
+
+        # building type widget
+        self.building_type = QComboBox(self)
+        self.building_type.addItems(["Nexus Tower", "Arasaka Spire", "Chrome Citadel"]) # add items to the list of strings
+        
+        # deep focus checkbox widget
+        self.deep_focus = QCheckBox("Deep Focus", self)
+        
+        # start button widget
+        start_button = QPushButton("Start Session", self)
+
+        layout = QFormLayout(self)
+        layout.addRow("Session Length:", self.session_length)
+        layout.addRow("Building Type:", self.building_type)
+        layout.addRow(self.deep_focus)
+        layout.addRow(start_button)
+
 
 # define a function that opens a new window when the user clicks the add on in the tools menu
 def open_session_window():
