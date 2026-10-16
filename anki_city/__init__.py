@@ -1,7 +1,7 @@
 # import the main necessary libraries that anki uses 
 from aqt import mw
 from aqt.utils import showInfo, qconnect
-from aqt.qt import QAction, QDialog, QSpinBox, QComboBox, QCheckBox, QPushButton, QFormLayout
+from aqt.qt import QAction, QDialog, QSpinBox, QComboBox, QCheckBox, QPushButton, QFormLayout, QLabel, QTimer
 
 session_window = None 
 
@@ -39,15 +39,38 @@ class SessionWindow(QDialog):
         # connect start button clicked signal
         qconnect(start_button.clicked, self.start_session)
 
+        # label for the time
+        self.time_label = QLabel("Time Remaining: 00:00", self)
+        layout.addRow(self.time_label)
 
-    # start timer function
+        # use QTImr instead of a sleep loop as a loop would prevent ankis main event loop and crash the app
+        self.timer = QTimer(self)
+        self.timer.setInterval(1000)  # 1 second interval
+        self.timer.timeout.connect(self.tick)
+
+
+    # start timer function, reads inputs at start so any changes dont effect already started session
     def start_session(self):
         minutes = self.session_length.value()
         building = self.building_type.currentText()
         deep_focus = self.deep_focus.isChecked()
 
-        # show info message with the selected options
-        showInfo(f"Starting a {minutes} minute session to build {building} with Deep Focus {'enabled' if deep_focus else 'disabled'}.")
+        self.seconds_left = minutes * 60
+        mins, secs = divmod(self.seconds_left, 60)
+        self.time_label.setText(f"Time Remaining: {mins:02d}:{secs:02d}")
+        self.timer.start()
+
+    # runs once every second , updates the time label and check if its at 0 
+    def tick(self):
+        self.seconds_left -= 1
+        mins, secs = divmod(self.seconds_left, 60)
+        self.time_label.setText(f"Time Remaining: {mins:02d}:{secs:02d}")
+
+        
+        if self.seconds_left <= 0:
+            self.timer.stop()
+            showInfo("Session Complete!")
+
 
 
 # define a function that opens a new window when the user clicks the add on in the tools menu
