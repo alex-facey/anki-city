@@ -6,9 +6,6 @@ from .session_window import SessionWindow
 
 session_window = None 
 
-
-
-
 # function that opens a new window when the user clicks the add on in the tools menu
 def open_session_window():
     global session_window
@@ -21,7 +18,8 @@ def open_session_window():
 
 # registered on Anki's answer hook so I can count reviews later
 def on_card_answered(reviewer, card, ease):
-    print(f"the button pressed was {ease}")
+    if session_window is not None:
+        session_window.record_answer()
 
 # create a qaction action that is a command the user can use, its parent is the main mw window becuase if it wasnt attached then the action would be disregarded
 action = QAction("Anki City", mw)

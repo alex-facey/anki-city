@@ -43,9 +43,15 @@ class SessionWindow(QDialog):
         self.timer.setInterval(1000)  # 1 second interval
         self.timer.timeout.connect(self.tick)
 
+        self.cards_label = QLabel("Cards Reviewed: 0", self)
+        layout.addRow(self.cards_label)
+        self.cards_reviewed = 0
+
 
     # start timer function, reads inputs at start so any changes dont effect already started session
     def start_session(self):
+        self.cards_reviewed = 0
+        self.cards_label.setText("Cards Reviewed: 0")
         minutes = self.session_length.value()
         self.session_building = self.building_type.currentText()
         self.deep_focus_enabled = self.deep_focus.isChecked()
@@ -72,8 +78,16 @@ class SessionWindow(QDialog):
         self.timer.stop()
         self.set_inputs_enabled(True)
 
-        showInfo(f"Session Complete! You built a {self.session_building}")
+        showInfo(f"Session Complete! You finished {self.cards_reviewed} cards and built a {self.session_building}")
+    
+    # counts every answer including Again, so there's never a reason to grade a card dishonestly to earn more
+    def record_answer(self):
+        if self.timer.isActive():
+            self.cards_reviewed += 1
+            self.cards_label.setText(f"Cards Reviewed: {self.cards_reviewed}")
 
+
+    #helper functions
     def set_inputs_enabled(self, enabled):
         self.session_length.setEnabled(enabled)
         self.building_type.setEnabled(enabled)
