@@ -1,8 +1,8 @@
 # import the main necessary libraries that anki uses 
+from aqt import mw
 from aqt.utils import showInfo, qconnect
 from aqt.qt import QDialog, QSpinBox, QComboBox, QCheckBox, QPushButton, QFormLayout, QLabel, QTimer
 
-BATCH_SIZE = 2
 
 # define a new class that is a window that will be opened when the user clicks the add on in the tools menu
 class SessionWindow(QDialog):
@@ -52,6 +52,8 @@ class SessionWindow(QDialog):
 
     # start timer function, reads inputs at start so any changes dont effect already started session
     def start_session(self):
+        config = mw.addonManager.getConfig(__name__)
+        self.batch_size = config["batch_size"]
         self.cards_reviewed = 0
         self.cards_label.setText("Cards Reviewed: 0")
         minutes = self.session_length.value()
@@ -79,7 +81,7 @@ class SessionWindow(QDialog):
     def finish_session(self):
         self.timer.stop()
         self.set_inputs_enabled(True)
-        total_buildings = 1 + self.cards_reviewed // BATCH_SIZE
+        total_buildings = 1 + self.cards_reviewed // self.batch_size
 
         showInfo(f"Session complete! You reviewed {self.cards_reviewed} cards and built {total_buildings} {self.session_building}{'s' if total_buildings != 1 else ''}")
     

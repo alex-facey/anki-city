@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Anki stores my personal add-on settings here, not code
+meta.json
+

@@ -9,7 +9,7 @@ Start a timed study session, choose a building type, and review cards. If I fini
 - [x] Step 2: Session timer (start button, countdown, building picker, deep focus toggle)
 
 ### Phase 2: Core loop
-- [ ] Step 3: Card counting and bonus buildings (count cards reviewed during a session, work out how many bonus buildings that earns from the batch size)
+- [x] Step 3: Card counting and bonus buildings (count cards reviewed during a session, work out how many bonus buildings that earns from the batch size)
 - [ ] Step 4: Save data (store the city, including building type, working or broken, and cards reviewed, in a file outside the add-on folder)
 
 ### Phase 3: The city

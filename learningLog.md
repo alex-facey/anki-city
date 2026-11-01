@@ -16,3 +16,5 @@
 - making deisgn decisions and edge test cases along the way
 - global goes inside the function you want to definet he variable
 - test in small steps and commit each time so its easier to see what sworking 
+- how a config file works, config.json holds defaultss
+- the files will be split by jobs/roles, each fileo only imports what it acctually needs
