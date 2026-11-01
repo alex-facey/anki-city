@@ -2,6 +2,8 @@
 from aqt.utils import showInfo, qconnect
 from aqt.qt import QDialog, QSpinBox, QComboBox, QCheckBox, QPushButton, QFormLayout, QLabel, QTimer
 
+BATCH_SIZE = 2
+
 # define a new class that is a window that will be opened when the user clicks the add on in the tools menu
 class SessionWindow(QDialog):
     def __init__(self, parent):
@@ -77,8 +79,9 @@ class SessionWindow(QDialog):
     def finish_session(self):
         self.timer.stop()
         self.set_inputs_enabled(True)
+        total_buildings = 1 + self.cards_reviewed // BATCH_SIZE
 
-        showInfo(f"Session Complete! You finished {self.cards_reviewed} cards and built a {self.session_building}")
+        showInfo(f"Session complete! You reviewed {self.cards_reviewed} cards and built {total_buildings} {self.session_building}{'s' if total_buildings != 1 else ''}")
     
     # counts every answer including Again, so there's never a reason to grade a card dishonestly to earn more
     def record_answer(self):
