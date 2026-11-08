@@ -2,7 +2,7 @@
 from aqt import mw
 from aqt.utils import showInfo, qconnect
 from aqt.qt import QDialog, QSpinBox, QComboBox, QCheckBox, QPushButton, QFormLayout, QLabel, QTimer
-
+from .storage import save_session
 
 # define a new class that is a window that will be opened when the user clicks the add on in the tools menu
 class SessionWindow(QDialog):
@@ -82,6 +82,7 @@ class SessionWindow(QDialog):
         self.timer.stop()
         self.set_inputs_enabled(True)
         total_buildings = 1 + self.cards_reviewed // self.batch_size
+        save_session(self.session_building, total_buildings,  self.cards_reviewed, broken=False)
 
         showInfo(f"Session complete! You reviewed {self.cards_reviewed} cards and built {total_buildings} {self.session_building}{'s' if total_buildings != 1 else ''}")
     
