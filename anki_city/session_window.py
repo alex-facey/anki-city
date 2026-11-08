@@ -2,7 +2,7 @@
 from aqt import mw
 from aqt.utils import showInfo, qconnect
 from aqt.qt import QDialog, QSpinBox, QComboBox, QCheckBox, QPushButton, QFormLayout, QLabel, QTimer
-from .storage import save_session
+from .storage import save_session, count_buildings
 
 # define a new class that is a window that will be opened when the user clicks the add on in the tools menu
 class SessionWindow(QDialog):
@@ -45,10 +45,14 @@ class SessionWindow(QDialog):
         self.timer.setInterval(1000)  # 1 second interval
         self.timer.timeout.connect(self.tick)
 
+        # label for number of cards reviewed
         self.cards_label = QLabel("Cards Reviewed: 0", self)
         layout.addRow(self.cards_label)
         self.cards_reviewed = 0
 
+        # label for count of buildings in city
+        self.city_label = QLabel(f"Your city: {count_buildings()} buildings", self)
+        layout.addRow(self.city_label)
 
     # start timer function, reads inputs at start so any changes dont effect already started session
     def start_session(self):
@@ -83,7 +87,8 @@ class SessionWindow(QDialog):
         self.set_inputs_enabled(True)
         total_buildings = 1 + self.cards_reviewed // self.batch_size
         save_session(self.session_building, total_buildings,  self.cards_reviewed, broken=False)
-
+        self.city_label.setText(f"Your city: {count_buildings()} buildings")
+        
         showInfo(f"Session complete! You reviewed {self.cards_reviewed} cards and built {total_buildings} {self.session_building}{'s' if total_buildings != 1 else ''}")
     
     # counts every answer including Again, so there's never a reason to grade a card dishonestly to earn more

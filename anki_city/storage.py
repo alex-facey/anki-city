@@ -28,3 +28,12 @@ def save_session(building_type, total_buildings, cards_reviewed, broken):
     })
     with open(_save_path(), "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
+
+def count_buildings():
+    data = load_city()
+
+    count = 0
+    for session in data["sessions"]:
+       count += session["count"]
+
+    return count
