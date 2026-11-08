@@ -10,7 +10,7 @@ Start a timed study session, choose a building type, and review cards. If I fini
 
 ### Phase 2: Core loop
 - [x] Step 3: Card counting and bonus buildings (count cards reviewed during a session, work out how many bonus buildings that earns from the batch size)
-- [ ] Step 4: Save data (store the city, including building type, working or broken, and cards reviewed, in a file outside the add-on folder)
+- [x] Step 4: Save data (store the city, including building type, working or broken, and cards reviewed, in a file outside the add-on folder)
 
 ### Phase 3: The city
 - [ ] Step 5: Isometric city (grid, a few placeholder building types, working and broken versions, automatic placement)

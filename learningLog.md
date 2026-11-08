@@ -18,3 +18,6 @@
 - test in small steps and commit each time so its easier to see what sworking 
 - how a config file works, config.json holds defaultss
 - the files will be split by jobs/roles, each fileo only imports what it acctually needs
+- to save user data in the seperate individualized profile folder and not the universal add on folder
+- json.load/json.dump with with open(...). Use "r" to read and "w" to write/replace
+- load, change, and saving json type files and also handling filedoesnt exist
